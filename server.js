@@ -91,6 +91,6 @@ io.on('connection', (socket) => {
 });
 
 http.listen(3004, () => {
-    console.log('listening on *:3004');
+    console.log('Connection on port 3004');
 
 });
