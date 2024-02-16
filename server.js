@@ -4,8 +4,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
     transports: ['websocket'],
     cors: {
-        origin: "*",
-
+        origin: "*"
     }
 });
 let games = new Map();
@@ -25,7 +24,7 @@ io.on('connection', (socket) => {
         });
 
         socket.on('joined-game', data => {
-            let obj = { ...data };
+            let obj = {...data};
             let playerColor = '';
 
             if (games.has(data.gameId)) {
@@ -33,11 +32,11 @@ io.on('connection', (socket) => {
                     ...obj, ...games.get(data.gameId)
                 }
                 playerColor = 'q';
-                const newPlayer = { id: data.playerId, score: 0, currentPlayer: 'p', color: playerColor };
+                const newPlayer = {id: data.playerId, score: 0, currentPlayer: 'p', color: playerColor};
                 obj.players.push(newPlayer)
             } else {
                 playerColor = 'p';
-                const newPlayer = { id: data.playerId, score: 0, currentPlayer: 'p', color: playerColor };
+                const newPlayer = {id: data.playerId, score: 0, currentPlayer: 'p', color: playerColor};
                 obj.players = [newPlayer]
             }
 
@@ -91,6 +90,6 @@ io.on('connection', (socket) => {
 });
 
 http.listen(3004, () => {
-    console.log('Connection on port 3004');
+    console.log('listening on *:3004');
 
 });
